@@ -7,6 +7,20 @@
 - **Backend:** Python, FastAPI, SQLAlchemy, SQLite, Pytest
 - **Frontend:** React, TypeScript, Mantine UI, Vitest
 
+## Скриншоты
+
+**Таблица с поисковыми запросами**
+![Таблица](screenshots/table.png)
+
+**Пагинация**
+![Пагинация](screenshots/pagination.png)
+
+**Создание нового запроса**
+![Создание запроса](screenshots/create.png)
+
+**Тесты бэкенда**
+![Тесты бэкенда](screenshots/tests.png)
+
 ## Запуск продакшен-сборки (единый сервис)
 ```
 cd backend
