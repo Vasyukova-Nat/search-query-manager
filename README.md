@@ -7,7 +7,14 @@
 - **Backend:** Python, FastAPI, SQLAlchemy, SQLite, Pytest
 - **Frontend:** React, TypeScript, Mantine UI, Vitest
 
-## Установка и запуск
+## Запуск продакшен-сборки (единый сервис)
+```
+cd backend
+uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+Открыть: http://localhost:8000
+
+## Запуск (режим разработки)
 Запуск в 2-х терминалах.  
 Backend (терминал 1):
 ```
