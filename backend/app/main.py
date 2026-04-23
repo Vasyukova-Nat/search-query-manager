@@ -5,6 +5,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.schemas import SearchQueryCreate, SearchQueryUpdate, PaginatedResponse, SearchQueryOut
 from app import crud
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 
 app = FastAPI()
 
@@ -73,3 +75,8 @@ async def delete_query(query_id: int, db: AsyncSession = Depends(get_db)):
 async def batch_delete(ids: list[int], db: AsyncSession = Depends(get_db)):
     await crud.delete_queries_batch(db, ids)
     return {"ok": True, "deleted": len(ids)}
+
+static_dir = Path(__file__).parent.parent / "static"
+if static_dir.exists():
+    app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="static")
+    
