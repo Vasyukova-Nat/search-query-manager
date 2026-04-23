@@ -4,8 +4,8 @@
 
 ## Стек
 
-- **Backend:** Python, FastAPI, SQLAlchemy, SQLite
-- **Frontend:** React, TypeScript, Mantine UI
+- **Backend:** Python, FastAPI, SQLAlchemy, SQLite, Pytest
+- **Frontend:** React, TypeScript, Mantine UI, Vitest
 
 ## Установка и запуск
 Запуск в 2-х терминалах.  
@@ -25,6 +25,12 @@ npm install
 npm run dev
 ```
 Интерфейс доступен по адресу: http://localhost:3000
+
+## Тесты (backend)
+```
+cd backend
+python -m pytest tests/ -v
+```
 
 ## Функционал
 - Отображение таблицы поисковых запросов с пагинацией (20 записей на странице)
