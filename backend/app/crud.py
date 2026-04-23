@@ -50,9 +50,15 @@ async def get_queries(
     page_size: int = 20,
     sort_by: str | None = None,
     sort_order: str | None = None,
+    search: str | None = None,
 ):
     query = _build_query(sort_by, sort_order)
     count_query = select(func.count(SearchQuery.id))
+
+    if search:
+        query = query.where(SearchQuery.name.contains(search))
+        count_query = count_query.where(SearchQuery.name.contains(search))
+
     total = (await db.execute(count_query)).scalar()
 
     offset = (page - 1) * page_size

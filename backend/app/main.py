@@ -29,7 +29,8 @@ async def list_queries(
 @app.post("/api/queries", response_model=SearchQueryOut, summary="Создать запрос")
 async def create_query(data: SearchQueryCreate, db: AsyncSession = Depends(get_db)):
     query = await crud.create_query(db, data)
-    is_expired = query.deadline < datetime.utcnow()
+    deadline = query.deadline.replace(tzinfo=timezone.utc) if query.deadline.tzinfo is None else query.deadline
+    is_expired = deadline < datetime.now(timezone.utc)
     return SearchQueryOut(
         id=query.id,
         name=query.name,
@@ -47,7 +48,8 @@ async def update_query(query_id: int, data: SearchQueryUpdate, db: AsyncSession 
     query = await crud.update_query(db, query_id, data)
     if not query:
         raise HTTPException(404, "Search query not found")
-    is_expired = query.deadline < datetime.now(timezone.utc)
+    deadline = query.deadline.replace(tzinfo=timezone.utc) if query.deadline.tzinfo is None else query.deadline
+    is_expired = deadline < datetime.now(timezone.utc)
     return SearchQueryOut(
         id=query.id,
         name=query.name,
